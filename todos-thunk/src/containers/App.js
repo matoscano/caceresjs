@@ -13,7 +13,7 @@ const App = ({ checkTodosInLocalStorage }) => {
   return (
     <div class="container bg-light d-flex align-items-center flex-column mt-5 shadow-lg rounded">
       <div class="row m-1">
-        <h1>CáceresJs - Redux Basic</h1>
+        <h1>CáceresJs - Redux Thunk</h1>
       </div>
       <div class="row m-3">
         <AddTodo />
