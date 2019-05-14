@@ -43,12 +43,11 @@ export const checkTodosInLocalStorage = () => {
     const todos = await localStorage.getItem("todos");
     if (!todos) {
       dispatch(setTodos([]));
-      dispatch(setLoading(false));
-      return;
     } else {
       const todosFromLocalStorage = JSON.parse(todos);
       dispatch(setTodos(todosFromLocalStorage));
-      dispatch(setLoading(false));
     }
+
+    dispatch(setLoading(false));
   };
 };
