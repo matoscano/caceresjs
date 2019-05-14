@@ -9,10 +9,9 @@ export function getTodosFromServer() {
     .catch(error => ({ error }));
 }
 
-export function* getTodosWorker() {
-  yield put(setLoading(true));
-  yield put(setError(null));
-  const { response, error } = yield call(getTodosFromServer);
+export function* handleResponse(entity) {
+  const { response, error } = entity;
+
   if (response) {
     const todos = response.data.todos;
     yield put(setTodos(todos));
@@ -21,5 +20,12 @@ export function* getTodosWorker() {
     yield put(setError("Error loading todos!"));
     console.log(error);
   }
+}
+
+export function* getTodosWorker() {
+  yield put(setLoading(true));
+  yield put(setError(null));
+  const entity = yield call(getTodosFromServer);
+  yield call(handleResponse, entity);
   yield put(setLoading(false));
 }
