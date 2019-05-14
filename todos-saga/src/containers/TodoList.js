@@ -5,10 +5,16 @@ import Todo from "../components/Todo";
 import { toggleTodo } from "../actions";
 import { VISIBILITY_FILTERS } from "../actions/types";
 
-const TodoList = ({ todos, toggleTodo, loading }) => {
+const TodoList = ({ todos, toggleTodo, loading, error }) => {
   const loadingSpinner = (
     <div className="spinner-border text-danger" role="status">
       <span className="sr-only">Loading...</span>
+    </div>
+  );
+
+  const renderErrorMsg = (
+    <div className="alert alert-danger" role="alert">
+      {error}
     </div>
   );
 
@@ -19,8 +25,9 @@ const TodoList = ({ todos, toggleTodo, loading }) => {
       ))}
     </ul>
   );
+  const renderContent = error ? renderErrorMsg : renderTodos;
 
-  return loading ? loadingSpinner : renderTodos;
+  return loading ? loadingSpinner : renderContent;
 };
 
 TodoList.propTypes = {
@@ -49,7 +56,8 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = state => ({
   todos: getVisibleTodos(state.todos.todos, state.visibilityFilter),
-  loading: state.todos.loading
+  loading: state.todos.loading,
+  error: state.todos.error
 });
 
 const mapDispatchToProps = dispatch => ({

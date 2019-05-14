@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addTodo, saveTodosInLocalStorage } from "../actions";
+import { addTodo, getTodos, setError } from "../actions";
 
-const AddTodo = ({ onAddTodo, onSaveTodosInLocalStorage, todos }) => {
+const AddTodo = ({ onAddTodo, onLoadTodosFromServer, onResetError }) => {
   const [input, setInputValue] = useState("");
 
   const handleInputValue = val => {
@@ -15,11 +15,12 @@ const AddTodo = ({ onAddTodo, onSaveTodosInLocalStorage, todos }) => {
       return;
     }
     onAddTodo(input);
+    onResetError(null);
     setInputValue("");
   };
 
-  const handleSaveTodos = () => {
-    onSaveTodosInLocalStorage(todos);
+  const handleLoadTodos = () => {
+    onLoadTodosFromServer();
   };
 
   return (
@@ -36,28 +37,24 @@ const AddTodo = ({ onAddTodo, onSaveTodosInLocalStorage, todos }) => {
         <button
           type="button"
           className="btn btn-primary ml-2"
-          onClick={handleSaveTodos}
+          onClick={handleLoadTodos}
         >
-          Save Todos
+          Load Todos
         </button>
       </form>
     </div>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    todos: state.todos.todos
-  };
-};
 const mapDispatchToProps = dispatch => {
   return {
     onAddTodo: input => dispatch(addTodo(input)),
-    onSaveTodosInLocalStorage: todos => dispatch(saveTodosInLocalStorage(todos))
+    onResetError: e => dispatch(setError(e)),
+    onLoadTodosFromServer: () => dispatch(getTodos())
   };
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(AddTodo);

@@ -31,6 +31,11 @@ const todosReducer = (state: Store = INITIAL_STATE, action: Action) => {
         ...state,
         todos: [...action.payload]
       };
+    case ACTION_TYPE.SET_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }

@@ -26,27 +26,11 @@ export const setTodos = todos => ({
   payload: todos
 });
 
-export const saveTodosInLocalStorage = todos => {
-  return (dispatch, getState) => {
-    if (todos) {
-      dispatch(setLoading(true));
-      localStorage.setItem("todos", JSON.stringify(todos));
-      dispatch(setLoading(false));
-    }
-  };
-};
+export const setError = error => ({
+  type: ACTION_TYPE.SET_ERROR,
+  payload: error
+});
 
-export const checkTodosInLocalStorage = () => {
-  return async dispatch => {
-    dispatch(setLoading(true));
-    const todos = await localStorage.getItem("todos");
-    if (!todos) {
-      dispatch(setTodos([]));
-    } else {
-      const todosFromLocalStorage = JSON.parse(todos);
-      dispatch(setTodos(todosFromLocalStorage));
-    }
-
-    dispatch(setLoading(false));
-  };
-};
+export const getTodos = () => ({
+  type: ACTION_TYPE.GET_TODOS_REQUEST
+});

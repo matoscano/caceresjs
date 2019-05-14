@@ -1,15 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { checkTodosInLocalStorage } from "../actions";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
 import Filter from "../components/Filter";
 
-const App = ({ checkTodosInLocalStorage }) => {
-  useEffect(() => {
-    // Check if todos in local storage
-    // checkTodosInLocalStorage();
-  });
+const App = () => {
   return (
     <div className="container bg-light d-flex align-items-center flex-column mt-5 shadow-lg rounded">
       <div className="row m-1">
@@ -28,7 +23,4 @@ const App = ({ checkTodosInLocalStorage }) => {
   );
 };
 
-export default connect(
-  null,
-  { checkTodosInLocalStorage }
-)(App);
+export default connect()(App);
