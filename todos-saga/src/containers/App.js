@@ -8,7 +8,7 @@ import Filter from "../components/Filter";
 const App = ({ checkTodosInLocalStorage }) => {
   useEffect(() => {
     // Check if todos in local storage
-    checkTodosInLocalStorage();
+    // checkTodosInLocalStorage();
   });
   return (
     <div className="container bg-light d-flex align-items-center flex-column mt-5 shadow-lg rounded">
